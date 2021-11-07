@@ -8,6 +8,7 @@ import {
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import Character from './class/character';
 import GlobalController from './class/globalController';
+import lineFactory from './utils/lineFactory';
 
 const globalController = new GlobalController();
 const scene = new Scene();
@@ -25,7 +26,7 @@ document.body.appendChild(renderer.domElement);
 const character = new Character(globalController);
 scene.add(character.instance);
 
-const planeGeometry = new PlaneGeometry(60, 60);
+const planeGeometry = new PlaneGeometry(50, 50);
 const planeMaterial = new MeshLambertMaterial({ color: 0xffffff });
 const plane = new Mesh(planeGeometry, planeMaterial);
 plane.rotation.x = -0.5 * Math.PI;
@@ -44,6 +45,27 @@ controls.mouseButtons = {
 
 const axes = new AxesHelper(20);
 scene.add(axes);
+
+const lineMap = [
+  { start: [25, 0, 5,], end: [-25, 0, 5] },
+  { start: [25, 0, 15], end: [-25, 0, 15] },
+  { start: [25, 0, 25], end: [-25, 0, 25] },
+  { start: [25, 0, -5], end: [-25, 0, -5] },
+  { start: [25, 0, -15], end: [-25, 0, -15] },
+  { start: [25, 0, -25], end: [-25, 0, -25] },
+  { start: [5, 0, 25,], end: [5, 0, -25] },
+  { start: [15, 0, 25,], end: [15, 0, -25] },
+  { start: [25, 0, 25,], end: [25, 0, -25] },
+  { start: [-5, 0, 25,], end: [-5, 0, -25] },
+  { start: [-15, 0, 25,], end: [-15, 0, -25] },
+  { start: [-25, 0, 25,], end: [-25, 0, -25] },
+];
+
+lineMap.forEach((pointData) => {
+  const { start, end } = pointData;
+  const line = lineFactory(start, end);
+  scene.add(line);
+});
 
 function animate() {
   requestAnimationFrame(animate);
