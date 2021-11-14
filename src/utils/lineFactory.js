@@ -7,7 +7,6 @@ const material = new LineBasicMaterial({ color: 0x000000 });
 
 const lineFactory = (pointA, pointB) => {
   const points = [];
-  console.log({ pointA });
   points.push(new Vector3(...pointA));
   points.push(new Vector3(...pointB));
 

@@ -7,6 +7,7 @@ import {
 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import Character from './class/character';
+import TrinityAvowed from './class/trinityAvowed';
 import GlobalController from './class/globalController';
 import lineFactory from './utils/lineFactory';
 
@@ -25,6 +26,9 @@ document.body.appendChild(renderer.domElement);
 
 const character = new Character(globalController);
 scene.add(character.instance);
+
+const trinityAvowed = new TrinityAvowed(globalController);
+scene.add(trinityAvowed.instance);
 
 const planeGeometry = new PlaneGeometry(50, 50);
 const planeMaterial = new MeshLambertMaterial({ color: 0xffffff });
